@@ -18,7 +18,7 @@ after_success:
   - docker build -t rksitunes/dev--docker--multi-server ./server
   - docker build -t rksitunes/dev--docker--multi-worker ./worker
   # Login into the docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password_stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   # Take these images to Docker hub
   - docker push rksitunes/dev--docker--multi-client

@@ -1,0 +1,28 @@
+
+language: generic
+
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t rksitunes/dev--docker--react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true rksitunes/dev--docker--react-test npm run test
+#   - docker run rksitunes/dev--docker--react-test npm run test -- --coverage
+
+after_success:
+  - docker build -t rksitunes/dev--docker--multi-client ./client
+  - docker build -t rksitunes/dev--docker--multi-nginx ./nginx
+  - docker build -t rksitunes/dev--docker--multi-server ./server
+  - docker build -t rksitunes/dev--docker--multi-worker ./worker
+  # Login into the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password_stdin
+
+  # Take these images to Docker hub
+  - docker push rksitunes/dev--docker--multi-client
+  - docker push rksitunes/dev--docker--multi-nginx
+  - docker push rksitunes/dev--docker--multi-server
+  - docker push rksitunes/dev--docker--multi-worker
+

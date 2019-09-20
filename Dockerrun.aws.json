@@ -1,0 +1,43 @@
+{
+	"AWSEBDockerrunVersion": 2,
+	"containerDefinitions": [{
+			"name": "client",
+			"//": "image to be pulled from docker that travis will be pushing to docker hub",
+			"image": "rahul9712/dev-docker-multi-client",
+			"#": "host name of service defined in docker-compose.yml",
+			"hostname": "client",
+			"essential": false
+		},
+		{
+			"name": "server",
+			"//": "image to be pulled from docker that travis will be pushing to docker hub",
+			"image": "rahul9712/dev-docker-multi-server",
+			"#": "host name of service defined in docker-compose.yml",
+			"hostname": "api",
+			"essential": false
+		},
+		{
+			"name": "worker",
+			"//": "image to be pulled from docker that travis will be pushing to docker hub",
+			"image": "rahul9712/dev-docker-multi-worker",
+			"#": "host name of service defined in docker-compose.yml",
+			"hostname": "worker",
+			"essential": false
+		},
+		{
+			"name": "nginx",
+			"//": "image to be pulled from docker that travis will be pushing to docker hub",
+			"image": "rahul9712/dev-docker-multi-nginx",
+			"#": "host name of service defined in docker-compose.yml",
+			"hostname": "nginx",
+			"##": "This server must be running all the time. If this crashed, all dependent servers should also die.",
+			"essential": true,
+			"portMappings": [{
+				"hostPort": 80,
+				"containerPort": 80
+			}],
+			"////": "Form a link between nginx to client and server containers",
+			"links": ["client", "server"]
+		}
+	]
+}

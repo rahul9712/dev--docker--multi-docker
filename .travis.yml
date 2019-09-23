@@ -27,17 +27,17 @@ after_success:
   - docker push rahul9712/dev-docker-multi-worker
 
 
-# TODO: implement deploy:
-deploy:
-  provider: elasticbeanstalk
-  region: "us-east-2"         # multidocker-env.pqfuscttyj.us-east-2.elasticbeanstalk.com/
-  app: "multi-docker"         # https://us-east-2.console.aws.amazon.com/elasticbeanstalk/home?region=us-east-2#/environment/dashboard?applicationName=multi-docker&environmentId=e-ampaxkpsy3
-  env: "MultiDocker-env"
-  bucket_name: "elasticbeanstalk-us-east-2-025262009214"
-  bucket_path: "multi-docker"     # Same as app name
-  on:
-    branch: master
-  access_key_id:
-    secure: "$AWS_ACCESS_KEY"
-  secret_access_key:
-    secure: "$AWS_SECRET_KEY"
+# # TODO: implement deploy:
+# deploy:
+#   provider: elasticbeanstalk
+#   region: "us-east-2"         # multidocker-env.pqfuscttyj.us-east-2.elasticbeanstalk.com/
+#   app: "multi-docker"         # https://us-east-2.console.aws.amazon.com/elasticbeanstalk/home?region=us-east-2#/environment/dashboard?applicationName=multi-docker&environmentId=e-ampaxkpsy3
+#   env: "MultiDocker-env"
+#   bucket_name: "elasticbeanstalk-us-east-2-025262009214"
+#   bucket_path: "multi-docker"     # Same as app name
+#   on:
+#     branch: master
+#   access_key_id:
+#     secure: "$AWS_ACCESS_KEY"
+#   secret_access_key:
+#     secure: "$AWS_SECRET_KEY"
